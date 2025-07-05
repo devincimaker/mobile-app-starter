@@ -1,0 +1,12 @@
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, arch:arm64, id:CA8D5129-C019-44E6-8909-070CDD2924CE, OS:18.5, name:iPhone 16 Pro }
+{ platform:iOS Simulator, arch:x86_64, id:CA8D5129-C019-44E6-8909-070CDD2924CE, OS:18.5, name:iPhone 16 Pro }
+** BUILD FAILED **
+
+
+The following build commands failed:
+	CompileC /Users/devinci/Library/Developer/Xcode/DerivedData/today-etvvzsfnhwjsmagkdydanhfphelx/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/React-microtasksnativemodule.build/Objects-normal/arm64/NativeMicrotasks.o /Users/devinci/Code/today/app/node_modules/react-native/ReactCommon/react/nativemodule/microtasks/NativeMicrotasks.cpp normal arm64 c++ com.apple.compilers.llvm.clang.1_0.compiler (in target 'React-microtasksnativemodule' from project 'Pods')
+	CompileC /Users/devinci/Library/Developer/Xcode/DerivedData/today-etvvzsfnhwjsmagkdydanhfphelx/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/React-idlecallbacksnativemodule.build/Objects-normal/arm64/NativeIdleCallbacks.o /Users/devinci/Code/today/app/node_modules/react-native/ReactCommon/react/nativemodule/idlecallbacks/NativeIdleCallbacks.cpp normal arm64 c++ com.apple.compilers.llvm.clang.1_0.compiler (in target 'React-idlecallbacksnativemodule' from project 'Pods')
+	CompileC /Users/devinci/Library/Developer/Xcode/DerivedData/today-etvvzsfnhwjsmagkdydanhfphelx/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/React-featureflagsnativemodule.build/Objects-normal/arm64/NativeReactNativeFeatureFlags.o /Users/devinci/Code/today/app/node_modules/react-native/ReactCommon/react/nativemodule/featureflags/NativeReactNativeFeatureFlags.cpp normal arm64 c++ com.apple.compilers.llvm.clang.1_0.compiler (in target 'React-featureflagsnativemodule' from project 'Pods')
+	Building workspace today with scheme today and configuration Debug
+(4 failures)
