@@ -25,6 +25,18 @@ export default function Signup() {
     if (password !== confirmPassword) {
       Alert.alert("Error", "Passwords do not match");
     }
+
+    try {
+      setLoading(true);
+      const { error } = await db.signUp(email, password);
+      if (error) {
+        Alert.alert("Error", error.message);
+      } else {
+        Alert.alert("Success", "Account created successfully");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -36,15 +48,31 @@ export default function Signup() {
         placeholder="Email"
         keyboardType="email-address"
         autoCapitalize="none"
+        value={email}
+        onChangeText={setEmail}
       />
-      <TextInput style={styles.input} placeholder="Password" secureTextEntry />
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        secureTextEntry
+        value={password}
+        onChangeText={setPassword}
+      />
       <TextInput
         style={styles.input}
         placeholder="Confirm Password"
         secureTextEntry
+        value={confirmPassword}
+        onChangeText={setConfirmPassword}
       />
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Signup</Text>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={handleSignup}
+        disabled={loading}
+      >
+        <Text style={styles.buttonText}>
+          {loading ? "Signing up..." : "Signup"}
+        </Text>
       </TouchableOpacity>
       <View style={styles.loginContainer}>
         <Text style={styles.loginText}>Already have an account?</Text>
