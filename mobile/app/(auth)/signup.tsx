@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "expo-router";
 import {
   View,
@@ -5,9 +6,27 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 
+import { db } from "../../services/db";
+
 export default function Signup() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSignup = async () => {
+    if (!email || !password || !confirmPassword) {
+      Alert.alert("Error", "Please fill in all fields");
+      return;
+    }
+    if (password !== confirmPassword) {
+      Alert.alert("Error", "Passwords do not match");
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Create Account</Text>
