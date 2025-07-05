@@ -7,7 +7,7 @@ import {
   ActivityIndicator,
   Alert,
 } from "react-native";
-import { Link, useRouter } from "expo-router";
+import { Link } from "expo-router";
 import { useState } from "react";
 
 import { auth } from "../../services/auth";
@@ -16,7 +16,6 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -29,8 +28,6 @@ export default function Login() {
       const { error } = await auth.signIn(email, password);
       if (error) {
         Alert.alert("Login failed", error.message);
-      } else {
-        router.replace("/(tabs)");
       }
     } finally {
       setLoading(false);

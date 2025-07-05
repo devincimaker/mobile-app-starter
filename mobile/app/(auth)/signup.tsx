@@ -9,7 +9,7 @@ import {
   Alert,
 } from "react-native";
 
-import { db } from "../../services/db";
+import { auth } from "../../services/auth";
 
 export default function Signup() {
   const [email, setEmail] = useState("");
@@ -28,7 +28,7 @@ export default function Signup() {
 
     try {
       setLoading(true);
-      const { error } = await db.signUp(email, password);
+      const { error } = await auth.signUp(email, password);
       if (error) {
         Alert.alert("Error", error.message);
       } else {

@@ -1,6 +1,5 @@
 import { StyleSheet, View, Text } from "react-native";
 import { FloatingActionButton } from "@/components/ui/FloatingActionButton";
-import { Redirect } from "expo-router";
 
 /**
  * TODO: Call an assistant from here that uses an advanced voice session to:
@@ -15,13 +14,12 @@ export default function HomeScreen() {
     // TODO: Implement task creation
   };
 
-  return <Redirect href="../(auth)/login" />;
-  // return (
-  //   <View style={styles.container}>
-  //     <Text style={styles.title}>All tasks</Text>
-  //     <FloatingActionButton onPress={handleCreateTask} />
-  //   </View>
-  // );
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>All tasks</Text>
+      <FloatingActionButton onPress={handleCreateTask} />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
