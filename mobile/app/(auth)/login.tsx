@@ -4,10 +4,39 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  ActivityIndicator,
+  Alert,
 } from "react-native";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
+import { useState } from "react";
+
+import { auth } from "../../services/auth";
 
 export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const handleLogin = async () => {
+    if (!email || !password) {
+      Alert.alert("Error", "Please enter both email and password");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const { error } = await auth.signIn(email, password);
+      if (error) {
+        Alert.alert("Login failed", error.message);
+      } else {
+        router.replace("/(tabs)");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome Back!</Text>
@@ -17,10 +46,26 @@ export default function Login() {
         placeholder="Email"
         keyboardType="email-address"
         autoCapitalize="none"
+        value={email}
+        onChangeText={setEmail}
       />
-      <TextInput style={styles.input} placeholder="Password" secureTextEntry />
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Login</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        secureTextEntry
+        value={password}
+        onChangeText={setPassword}
+      />
+      <TouchableOpacity
+        style={styles.button}
+        onPress={handleLogin}
+        disabled={loading}
+      >
+        {loading ? (
+          <ActivityIndicator color="#fff" />
+        ) : (
+          <Text style={styles.buttonText}>Login</Text>
+        )}
       </TouchableOpacity>
       <View style={styles.signupContainer}>
         <Text style={styles.signupText}>Don't have an account?</Text>
