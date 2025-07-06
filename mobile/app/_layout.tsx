@@ -7,10 +7,11 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { ActivityIndicator, View } from "react-native";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { useSession } from "@/hooks/useSession";
-import { ActivityIndicator, View } from "react-native";
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -35,17 +36,19 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Protected guard={isLoggedIn}>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        </Stack.Protected>
-        <Stack.Protected guard={!isLoggedIn}>
-          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-        </Stack.Protected>
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+        <Stack>
+          <Stack.Protected guard={isLoggedIn}>
+            <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
+          </Stack.Protected>
+          <Stack.Protected guard={!isLoggedIn}>
+            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+          </Stack.Protected>
+          <Stack.Screen name="+not-found" />
+        </Stack>
+        <StatusBar style="auto" />
+      </ThemeProvider>
+    </GestureHandlerRootView>
   );
 }
