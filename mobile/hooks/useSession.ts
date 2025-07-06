@@ -23,5 +23,7 @@ export function useSession() {
 
   const signOut = () => auth.signOut();
 
-  return { session, initializing, signOut };
+  const isLoggedIn = !!session;
+
+  return { session, initializing, signOut, isLoggedIn };
 }

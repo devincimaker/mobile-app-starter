@@ -1,5 +1,5 @@
-import { StyleSheet, View, Text } from "react-native";
-import { FloatingActionButton } from "@/components/ui/FloatingActionButton";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { useSession } from "@/hooks/useSession";
 
 /**
  * TODO: Call an assistant from here that uses an advanced voice session to:
@@ -9,15 +9,14 @@ import { FloatingActionButton } from "@/components/ui/FloatingActionButton";
  * */
 
 export default function HomeScreen() {
-  const handleCreateTask = () => {
-    console.log("Create new task");
-    // TODO: Implement task creation
-  };
+  const { signOut } = useSession();
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>All tasks</Text>
-      <FloatingActionButton onPress={handleCreateTask} />
+      <TouchableOpacity style={styles.button} onPress={signOut}>
+        <Text style={styles.buttonText}>Sign Out</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -31,5 +30,14 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     marginTop: 100,
+  },
+  button: {
+    backgroundColor: "red",
+    padding: 10,
+    borderRadius: 5,
+    margin: 10,
+  },
+  buttonText: {
+    color: "white",
   },
 });

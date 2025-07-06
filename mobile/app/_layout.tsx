@@ -14,7 +14,7 @@ import { ActivityIndicator, View } from "react-native";
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
-  const { session, initializing } = useSession();
+  const { initializing, isLoggedIn } = useSession();
 
   const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
@@ -26,6 +26,7 @@ export default function RootLayout() {
   }
 
   if (initializing) {
+    // TODO: Extract this to a component.
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <ActivityIndicator size="large" />
@@ -36,11 +37,12 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <Stack>
-        {session ? (
+        <Stack.Protected guard={isLoggedIn}>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        ) : (
+        </Stack.Protected>
+        <Stack.Protected guard={!isLoggedIn}>
           <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-        )}
+        </Stack.Protected>
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style="auto" />
